@@ -117,22 +117,32 @@ async function loadCourses() {
   showLoader('courses-grid', 'course', 6);
   
   try {
-    // Fetch from both APIs
+    // Debug: Check if we are on Vercel or Local
+    console.log("Fetching courses from proxy...");
+
     const [oldRes, newRes] = await Promise.allSettled([
-      fetch(`${PROXY_API}/batches_old`),
-      fetch(`${PROXY_API}/batches_new`)
+      fetch(`/api/old/all-batches`),
+      fetch(`/api/new/batches`)
     ]);
 
     let oldCourses = [];
-    if (oldRes.status === 'fulfilled' && oldRes.value.ok) {
-      const json = await oldRes.value.json();
-      oldCourses = parseCoursesResponse(json);
+    if (oldRes.status === 'fulfilled') {
+      if (oldRes.value.ok) {
+        const json = await oldRes.value.json();
+        oldCourses = parseCoursesResponse(json);
+      } else {
+        console.error("Old API Fetch Error:", oldRes.value.status);
+      }
     }
 
     let newCourses = [];
-    if (newRes.status === 'fulfilled' && newRes.value.ok) {
-      const json = await newRes.value.json();
-      newCourses = parseNewCoursesResponse(json);
+    if (newRes.status === 'fulfilled') {
+      if (newRes.value.ok) {
+        const json = await newRes.value.json();
+        newCourses = parseNewCoursesResponse(json);
+      } else {
+        console.error("New API Fetch Error:", newRes.value.status);
+      }
     }
 
     state.courses = [...oldCourses, ...newCourses];
@@ -160,7 +170,7 @@ async function loadSubjects(courseId) {
   if (courseId.startsWith('new_')) {
     const rawId = courseId.replace('new_', '');
     try {
-      const response = await fetch(`${PROXY_API}/batch_detail/${rawId}`);
+      const response = await fetch(`/api/new/batch/${rawId}`);
       if (!response.ok) throw new Error("New API error");
       const json = await response.json();
 
@@ -192,7 +202,7 @@ async function loadSubjects(courseId) {
 
   // Handle Default API batches
   try {
-    const response = await fetch(`${PROXY_API}/subjects/${courseId}`);
+    const response = await fetch(`/api/old/subjects/${courseId}`);
     if (!response.ok) {
       throw new Error(`Server returned status ${response.status}`);
     }
@@ -250,7 +260,7 @@ async function loadContent(contentId) {
   }
 
   try {
-    const response = await fetch(`${PROXY_API}/content/${contentId}`);
+    const response = await fetch(`/api/old/subject/content/${contentId}`);
     if (!response.ok) {
       throw new Error(`Server returned status ${response.status}`);
     }

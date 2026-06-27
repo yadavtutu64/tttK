@@ -1,24 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/api/batches_old",
-      "destination": "https://cds-journey-api-gules.vercel.app/all-batches"
+      "source": "/api/old/:path*",
+      "destination": "https://cds-journey-api-gules.vercel.app/:path*"
     },
     {
-      "source": "/api/batches_new",
-      "destination": "https://cds-api-new.vercel.app/api/batches"
-    },
-    {
-      "source": "/api/subjects/:id",
-      "destination": "https://cds-journey-api-gules.vercel.app/subjects/:id"
-    },
-    {
-      "source": "/api/batch_detail/:id",
-      "destination": "https://cds-api-new.vercel.app/api/batch/:id"
-    },
-    {
-      "source": "/api/content/:id",
-      "destination": "https://cds-journey-api-gules.vercel.app/subject/content/:id"
+      "source": "/api/new/:path*",
+      "destination": "https://cds-api-new.vercel.app/api/:path*"
     }
   ]
 }
