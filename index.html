@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CDS Study - Premium Defence Services Learning Platform</title>
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header id="main-header" class="main-header">
+    <div class="nav-container">
+      <div id="brand-logo" class="brand-logo" onclick="goHome()">
+        <div class="logo-icon-wrapper">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <div class="logo-text">
+          <span class="brand-title">CDS Study</span>
+          <span class="brand-tag">WEB ACADEMY</span>
+        </div>
+      </div>
+
+      <!-- Search Box (Integrated in Navbar) -->
+      <div class="search-wrapper">
+        <i data-lucide="search" class="search-icon"></i>
+        <input type="text" id="global-search" placeholder="Search courses instantly..." autocomplete="off">
+        <button id="search-clear" class="search-clear-btn" aria-label="Clear Search">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <!-- Theme & Action Toggles -->
+      <div class="header-actions">
+        <button id="theme-toggle" class="action-btn theme-btn" aria-label="Toggle Theme">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+        <a href="#all-batches-anchor" class="explore-nav-btn">Explore Batches</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Breadcrumbs -->
+  <div id="global-breadcrumb-bar" class="breadcrumb-container hidden">
+    <div class="breadcrumb-content">
+      <button id="nav-back-btn" class="nav-back-btn">
+        <i data-lucide="arrow-left"></i> Back
+      </button>
+      <div class="breadcrumbs">
+        <span class="breadcrumb-item" onclick="goHome()">Home</span>
+        <i data-lucide="chevron-right" class="breadcrumb-separator"></i>
+        <span id="breadcrumb-course" class="breadcrumb-item active hidden">Course</span>
+        <i id="breadcrumb-separator-subject" data-lucide="chevron-right" class="breadcrumb-separator hidden"></i>
+        <span id="breadcrumb-subject" class="breadcrumb-item active hidden">Subject</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="app-main">
+
+    <!-- SCREEN 1: Home/Course Batches View -->
+    <section id="screen-home" class="screen-section active">
+      <!-- Hero Banner -->
+      <div class="hero-banner">
+        <div class="hero-bg-shapes">
+          <div class="shape shape-1"></div>
+          <div class="shape shape-2"></div>
+        </div>
+        <div class="hero-content">
+          <span class="badge">CHOOSE YOUR PATHWAY</span>
+          <h1>Crack CDS with India's Premium Learning Platform</h1>
+          <p>Get unlimited access to structured video lectures, curated PDF study materials, real-time assignments, and practice tests designed by experts.</p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num">12K+</span>
+              <span class="stat-lbl">Active Aspirants</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num">500+</span>
+              <span class="stat-lbl">Structured Batches</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num">98.4%</span>
+              <span class="stat-lbl">Success Rate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Batches Heading & Filters -->
+      <div id="all-batches-anchor" class="section-header-row">
+        <div class="section-title-wrapper">
+          <h2>All Available Batches</h2>
+          <p>Choose your course and start your defence journey today</p>
+        </div>
+        <div class="course-filters">
+          <button class="filter-btn active" data-filter="all">All Batches</button>
+          <button class="filter-btn" data-filter="new-batches">New Batches</button>
+          <button class="filter-btn" data-filter="premium">Premium</button>
+          <button class="filter-btn" data-filter="free">Free Practice</button>
+        </div>
+      </div>
+
+      <!-- Course Batches Grid -->
+      <div id="courses-grid" class="courses-grid">
+        <!-- Skeleton Loaders rendered dynamically by JS on init -->
+      </div>
+    </section>
+
+
+    <!-- SCREEN 2: Subjects View -->
+    <section id="screen-subjects" class="screen-section">
+      <!-- Course Detail Top Banner -->
+      <div class="course-detail-banner">
+        <div class="banner-inner">
+          <span class="banner-badge">BATCH PORTAL</span>
+          <h2 id="current-course-title">Course Subjects</h2>
+          <p id="current-course-desc">Access high-quality syllabus coverage, conceptual explanations, and topic matrices below.</p>
+          <div class="banner-meta">
+            <span class="meta-item"><i data-lucide="book-open"></i> <span id="current-course-subject-count">0</span> Subjects Available</span>
+            <span class="meta-item"><i data-lucide="user-check"></i> Expert Faculty Team</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header-row">
+        <div class="section-title-wrapper">
+          <h3>Academic Subjects</h3>
+          <p>Select a subject to access its lectures, files, and exercises</p>
+        </div>
+      </div>
+
+      <!-- Subjects Grid -->
+      <div id="subjects-grid" class="subjects-grid">
+        <!-- Loaded via JS -->
+      </div>
+    </section>
+
+
+    <!-- SCREEN 3: Content Dashboard View -->
+    <section id="screen-content" class="screen-section">
+      <!-- Subject Header Card -->
+      <div class="subject-header-card">
+        <div class="subject-header-grid">
+          <div class="subject-header-main">
+            <span class="subject-badge">STUDY DESK</span>
+            <h2 id="current-subject-title">Subject Content</h2>
+            <p class="instructor-tag"><i data-lucide="user"></i> Faculty: <span id="current-subject-teacher">Expert Instructor</span></p>
+          </div>
+          <div class="subject-info-stats">
+            <div class="header-stat">
+              <span class="stat-icon"><i data-lucide="play-circle"></i></span>
+              <div class="stat-text">
+                <span class="stat-value" id="current-subject-class-count">0</span>
+                <span class="stat-label">Video Classes</span>
+              </div>
+            </div>
+            <div class="header-stat">
+              <span class="stat-icon"><i data-lucide="file-text"></i></span>
+              <div class="stat-text">
+                <span class="stat-value" id="current-subject-pdf-count">0</span>
+                <span class="stat-label">PDF Notes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Layout: Tabbed Sidebar + Main Workspace Grid -->
+      <div class="study-desk-container">
+        <!-- Sidebar Navigation Tabs -->
+        <aside class="study-desk-sidebar">
+          <div class="sidebar-title">Syllabus Breakdown</div>
+          <div class="tabs-list">
+            <button class="tab-item active" data-tab="all">
+              <i data-lucide="layout-grid"></i>
+              <span>All Materials</span>
+              <span class="tab-badge" id="badge-count-all">0</span>
+            </button>
+            <button class="tab-item" data-tab="videos">
+              <i data-lucide="video"></i>
+              <span>Video Lectures</span>
+              <span class="tab-badge" id="badge-count-videos">0</span>
+            </button>
+            <button class="tab-item" data-tab="pdfs">
+              <i data-lucide="file-text"></i>
+              <span>PDF Notes</span>
+              <span class="tab-badge" id="badge-count-pdfs">0</span>
+            </button>
+            <button class="tab-item" data-tab="assignments">
+              <i data-lucide="clipboard-list"></i>
+              <span>Assignments</span>
+              <span class="tab-badge" id="badge-count-assignments">0</span>
+            </button>
+            <button class="tab-item" data-tab="tests">
+              <i data-lucide="award"></i>
+              <span>Practice Tests</span>
+              <span class="tab-badge" id="badge-count-tests">0</span>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Main Content Workspace -->
+        <div class="study-desk-workspace">
+          <!-- Live Chapter and Topic Card (Breadcrumb-ish) -->
+          <div class="workspace-topic-meta">
+            <div class="topic-meta-left">
+              <div class="meta-label">CURRENT TOPIC</div>
+              <h4 id="workspace-chapter-name">Chapter Name</h4>
+              <p id="workspace-topic-name">Topic Details</p>
+            </div>
+            <div class="workspace-topic-right">
+              <span class="live-tag">Online Dashboard</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Study Content Grid -->
+          <div id="content-items-container" class="content-items-container">
+            <!-- Loaded dynamically by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Error State UI Container -->
+    <div id="error-container" class="error-container hidden">
+      <div class="error-card">
+        <div class="error-icon-box">
+          <i data-lucide="alert-triangle"></i>
+        </div>
+        <h3>Connectivity Error</h3>
+        <p id="error-message-text">We are unable to communicate with the academic services. Please check your internet connection or retry.</p>
+        <button id="error-retry-btn" class="btn-retry">
+          <i data-lucide="refresh-cw"></i> Retry Connection
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty State UI Container -->
+    <div id="empty-container" class="empty-container hidden">
+      <div class="empty-card">
+        <div class="empty-icon-box">
+          <i data-lucide="search-code"></i>
+        </div>
+        <h3 id="empty-title">No Academic Records Found</h3>
+        <p id="empty-message">There is no matching educational materials or items in this query.</p>
+        <button id="empty-action-btn" class="btn-empty-action" onclick="goHome()">
+          Return to Batches
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Video Player Modal Overlay -->
+  <div id="video-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <span class="modal-badge">LECTURE PREVIEW</span>
+          <h3 id="modal-video-title">Class Lecture Video</h3>
+        </div>
+        <button id="modal-close" class="modal-close-btn" aria-label="Close Video Player">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="video-player-wrapper">
+          <!-- Fallback or custom HTML5 mock screen -->
+          <div class="video-overlay-preview" id="video-player-display">
+            <div class="video-loader-placeholder">
+              <i data-lucide="play" class="glowing-play-icon"></i>
+              <p>Streaming Lecture Media Player...</p>
+              <span class="video-sub-text">Mock streaming connection established</span>
+            </div>
+            <div class="mock-controls">
+              <div class="control-btn"><i data-lucide="play"></i></div>
+              <div class="control-btn"><i data-lucide="volume-2"></i></div>
+              <div class="progress-bar-mock"><div class="progress-filled"></div></div>
+              <div class="control-btn"><i data-lucide="maximize"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="video-details">
+          <p class="video-teacher"><i data-lucide="users"></i> Study Material: Comprehensive Defense Syllabus Coverage</p>
+          <p class="video-warning"><i data-lucide="info"></i> Video lecture streams require an active server-side live-token. Direct streaming preview is loaded for mock presentation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Professional Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="footer-logo">
+            <i data-lucide="shield"></i>
+            <span>CDS Study</span>
+          </div>
+          <p>Empowering defence aspirants across India with affordable, high-quality exam preparation resources. Join our expert-led batches and unlock your full potential.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Youtube"><i data-lucide="youtube"></i></a>
+            <a href="#" aria-label="Telegram"><i data-lucide="send"></i></a>
+            <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-links-col">
+          <h4>Defence Batches</h4>
+          <ul>
+            <li><a href="#" onclick="goHome()">CDS Exam Course</a></li>
+            <li><a href="#" onclick="goHome()">IMA Special Batch</a></li>
+            <li><a href="#" onclick="goHome()">OTA Combined Batch</a></li>
+            <li><a href="#" onclick="goHome()">AFA Wings Batch</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Syllabus Resources</h4>
+          <ul>
+            <li><a href="#">General Mathematics</a></li>
+            <li><a href="#">English Grammar & Reading</a></li>
+            <li><a href="#">General Knowledge & History</a></li>
+            <li><a href="#">Defence Current Affairs</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Support & Help</h4>
+          <ul>
+            <li><a href="#">Technical Queries</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact Faculty Support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 CDS Study Web Academy. All rights reserved. Designed with premium educational standards.</p>
+        <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
+          <i data-lucide="chevrons-up"></i>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript Controller -->
+  <script src="script.js"></script>
+</body>
+</html>

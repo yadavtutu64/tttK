@@ -1,0 +1,6 @@
+{
+  "name": "CDS Study Web",
+  "description": "A premium, responsive Vanilla JS online education platform for CDS aspirants featuring batched courses, subject grids, content playback, and an offline search index with a refined dashboard experience.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
